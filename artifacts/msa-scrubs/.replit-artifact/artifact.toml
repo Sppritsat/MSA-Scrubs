@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "MSA Scrubs — Tienda online"
+description = "Demo navegable de una tienda online para MSA Scrubs, con catálogo de pijamas quirúrgicas, filtros, guía de tallas, carrito y pedidos por WhatsApp."
+version = "1.0.0"
+id = "artifacts/msa-scrubs"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 25646
+
+[services.development]
+run = "pnpm --filter @workspace/msa-scrubs run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/msa-scrubs", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/msa-scrubs/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "25646"
+BASE_PATH = "/"

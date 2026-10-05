@@ -1,0 +1,206 @@
+3. Ahora modifica ProductVisual
+
+Busca esto:
+
+function ProductVisual({ product, large = false }: { product: Product; large?: boolean }) {
+
+Cámbialo por:
+
+function ProductVisual({
+  product,
+  large = false,
+  selectedColor,
+}: {
+  product: Product;
+  large?: boolean;
+  selectedColor?: string;
+}) {
+
+Ahora, justo después de abrir la función:
+
+function ProductVisual({
+  product,
+  large = false,
+  selectedColor,
+}: {
+  product: Product;
+  large?: boolean;
+  selectedColor?: string;
+}) {
+
+agrega:
+
+  const colorStyle = getColorStyle(product, selectedColor);
+
+Entonces tendrás:
+
+function ProductVisual({
+  product,
+  large = false,
+  selectedColor,
+}: {
+  product: Product;
+  large?: boolean;
+  selectedColor?: string;
+}) {
+  const colorStyle = getColorStyle(product, selectedColor);
+
+  return (
+4. Cambia los colores internos del visual
+
+Dentro de ProductVisual tienes actualmente:
+
+style={{ background: `linear-gradient(145deg, ${product.tone}, #f4f0e8)` }}
+
+Cámbialo por:
+
+style={{
+  background: `linear-gradient(145deg, ${colorStyle.tone}, #f4f0e8)`,
+}}
+
+Después tienes:
+
+style={{ background: product.accent }}
+
+Cámbialo por:
+
+style={{ background: colorStyle.accent }}
+
+Hay dos lugares con product.accent, así que cambia ambos.
+
+Y este:
+
+style={{ background: product.tone }}
+
+cámbialo por:
+
+style={{ background: colorStyle.tone }}
+5. El resultado completo de ProductVisual
+
+Para que no tengas que buscar los cuatro lugares, puedes reemplazar toda la función ProductVisual por esta:
+
+function ProductVisual({
+  product,
+  large = false,
+  selectedColor,
+}: {
+  product: Product;
+  large?: boolean;
+  selectedColor?: string;
+}) {
+  const colorStyle = getColorStyle(product, selectedColor);
+
+  return (
+    <div
+      className={`visual-shine relative ${
+        large ? 'h-[390px] sm:h-[500px]' : 'h-[285px]'
+      } overflow-hidden`}
+      style={{
+        background: `linear-gradient(145deg, ${colorStyle.tone}, #f4f0e8)`,
+      }}
+    >
+      <div
+        className="absolute -right-16 -top-20 h-64 w-64 rounded-full opacity-35"
+        style={{ background: colorStyle.accent }}
+      />
+
+      <div
+        className="absolute bottom-0 left-1/2 h-[86%] w-[56%] -translate-x-1/2 rounded-t-[48%] opacity-90"
+        style={{
+          background: colorStyle.accent,
+          clipPath:
+            'polygon(25% 0, 75% 0, 100% 25%, 80% 100%, 56% 100%, 50% 52%, 44% 100%, 20% 100%, 0 25%)',
+        }}
+      />
+
+      <div
+        className="absolute bottom-[34%] left-1/2 h-20 w-24 -translate-x-1/2 rounded-b-[45%] rounded-t-[20%] border-[9px] border-white/25"
+        style={{ background: colorStyle.tone }}
+      />
+
+      <div className="absolute bottom-5 left-5 text-[10px] font-semibold uppercase tracking-[.24em] text-[#1d3d43]/65">
+        {product.category}
+      </div>
+
+      <div className="absolute right-5 top-5 font-display text-4xl font-semibold text-[#f8f4eb]/80">
+        {product.name.slice(0, 1)}
+      </div>
+
+      {selectedColor && (
+        <div className="absolute bottom-5 right-5 rounded-full bg-white/70 px-3 py-1 text-[10px] font-semibold uppercase tracking-[.12em] text-[#1d3d43] backdrop-blur-sm">
+          {selectedColor}
+        </div>
+      )}
+    </div>
+  );
+}
+
+Esto ya hace que el componente pueda recibir un color.
+
+6. Ahora viene la parte importante: conectar el color
+
+Dentro de ProductModal tienes actualmente:
+
+<ProductVisual product={product} large />
+
+Cámbialo por:
+
+<ProductVisual
+  product={product}
+  large
+  selectedColor={color}
+/>
+
+Esto significa:
+
+ProductModal
+      │
+      ├── color = "Azul marino"
+      │
+      ↓
+ProductVisual
+      │
+      └── selectedColor="Azul marino"
+
+Y React vuelve a renderizar el componente automáticamente.
+
+Eso es precisamente la parte "reactiva" de React.
+
+7. También hagamos reactivo el carrito
+
+Esto es importante.
+
+En CartDrawer tienes:
+
+<ProductVisual product={item.product} />
+
+Cámbialo por:
+
+<ProductVisual
+  product={item.product}
+  selectedColor={item.color}
+/>
+
+Así, si agregas:
+
+Amalia
+Azul marino
+M
+
+el pequeño producto del carrito también será azul marino.
+
+8. Y el modal de "Completa tu conjunto"
+
+En CompanionOfferModal tienes:
+
+<ProductVisual product={offer.companion} large />
+
+Cámbialo por:
+
+<ProductVisual
+  product={offer.companion}
+  large
+  selectedColor={offer.color}
+/>
+
+Así todo el flujo mantiene el color seleccionado.

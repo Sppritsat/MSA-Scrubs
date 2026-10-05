@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Uniformes médicos MSA Scrubs: conjuntos, filipinas, pantalones, gorros y cubrepolvos.">
+    <meta name="theme-color" content="#f7f4ed">
+    <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+    <meta property="og:title" content="MSA Scrubs — Tienda online">
+    <meta property="og:description" content="Uniformes que acompañan tu forma de cuidar.">
+    <meta property="og:type" content="website">
+    <title>MSA Scrubs — Tienda online</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles.css">
+    <script type="module" src="./script.js"></script>
+  </head>
+  <body>
+    <div class="announcement">Envíos a todo México · Cambios fáciles durante 30 días</div>
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand" href="#inicio" aria-label="MSA Scrubs, ir al inicio">
+          <img src="./images/msa-scrubs-logo.png" alt="MSA Scrubs & Uniforms">
+        </a>
+        <button class="icon-button mobile-menu" type="button" aria-label="Abrir menú" data-action="toggle-menu">☰</button>
+        <nav class="main-nav" id="main-nav" aria-label="Navegación principal">
+          <a href="#coleccion">Colección</a>
+          <a href="#esenciales">Esenciales</a>
+          <button type="button" data-action="open-guide">Guía de tallas</button>
+          <a href="#preguntas">Ayuda</a>
+        </nav>
+        <div class="header-actions">
+          <label class="search-box desktop-search">
+            <span aria-hidden="true">⌕</span>
+            <input id="search-desktop" type="search" placeholder="Buscar pieza" aria-label="Buscar pieza">
+          </label>
+          <button class="icon-button cart-trigger" type="button" aria-label="Abrir carrito" data-action="open-cart">
+            <span aria-hidden="true">▱</span>
+            <span class="cart-count" id="cart-count" hidden>0</span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main id="inicio">
+      <section class="hero page-width">
+        <div class="hero-copy">
+          <p class="eyebrow"><span></span> Uniformes para tu manera de cuidar</p>
+          <h1>Tu turno,<br><span>a tu ritmo.</span></h1>
+          <p class="hero-description">Scrubs que se sienten bien desde la primera ronda. Diseñados en México para acompañar cada movimiento de quienes cuidan.</p>
+          <div class="hero-actions">
+            <a class="button button-accent" href="#coleccion">Ver colección <span aria-hidden="true">→</span></a>
+            <button class="button button-outline" type="button" data-action="open-guide"><span aria-hidden="true">⌁</span> Encuentra tu talla</button>
+          </div>
+          <div class="social-proof">
+            <div class="avatar-stack"><span>LP</span><span>AR</span><span>MG</span></div>
+            <span>Elegidos por profesionales en todo México</span>
+          </div>
+        </div>
+        <div class="hero-art" aria-label="Ilustración de uniforme médico">
+          <span class="hero-season">Colección 2024</span>
+          <div class="hero-garment"><span></span></div>
+          <div class="hero-art-caption"><div><strong>Línea esencial</strong><span>Comodidad que se nota.</span></div><span class="round-arrow">→</span></div>
+        </div>
+      </section>
+
+      <section class="benefit-band" aria-label="Ventajas">
+        <div class="benefit-inner page-width">
+          <div><span class="benefit-icon">✳</span><span><strong>Pensados para tu turno</strong>Movimiento sin distracciones</span></div>
+          <div><span class="benefit-icon">⇢</span><span><strong>Envíos a todo México</strong>Seguimiento en cada pedido</span></div>
+          <div><span class="benefit-icon accent-text">✧</span><span><strong>Hechos para durar</strong>Telas suaves y resistentes</span></div>
+        </div>
+      </section>
+
+      <section class="collection page-width" id="coleccion">
+        <div class="section-heading">
+          <div>
+            <p class="section-kicker">La colección</p>
+            <h2>Piezas para estar<br class="desktop-break"> bien en lo que haces.</h2>
+          </div>
+          <div class="filter-hint"><span aria-hidden="true">▽</span> Filtra por corte, género o busca una pieza específica.</div>
+        </div>
+        <div class="category-shortcuts">
+          <button class="category-shortcut warm" type="button" data-action="shortcut-category" data-category="Cubrepolvo">
+            <span><strong>Cubrepolvos</strong><small>Color y talla para tu día clínico.</small></span><span aria-hidden="true">→</span>
+          </button>
+          <button class="category-shortcut cool" type="button" data-action="shortcut-category" data-category="Gorro quirúrgico">
+            <span><strong>Catálogo de gorros quirúrgicos</strong><small>Diseños unitalla para completar tu uniforme.</small></span><span aria-hidden="true">→</span>
+          </button>
+        </div>
+        <div class="catalog-controls">
+          <div class="gender-filters" id="gender-filters" aria-label="Filtrar por género"></div>
+          <span class="control-divider"></span>
+          <label class="category-select-label"><span class="visually-hidden">Categoría</span><select id="category-filter"></select></label>
+          <label class="search-box mobile-search"><span aria-hidden="true">⌕</span><input id="search-mobile" type="search" placeholder="Buscar" aria-label="Buscar pieza"></label>
+        </div>
+        <div class="product-grid" id="product-grid"></div>
+        <div class="empty-state" id="empty-state" hidden>
+          <span aria-hidden="true">⌕</span>
+          <h3>No encontramos esa pieza</h3>
+          <p>Prueba con otro término o limpia tus filtros.</p>
+          <button class="button button-dark" type="button" data-action="clear-filters">Limpiar filtros</button>
+        </div>
+      </section>
+
+      <section class="essentials" id="esenciales">
+        <div class="essentials-inner page-width">
+          <div class="essentials-copy">
+            <p class="section-kicker">El uniforme como herramienta</p>
+            <h2>Más espacio para lo que importa.</h2>
+            <p>Bolsillos donde los necesitas, cortes que siguen tu postura y materiales que resisten el ritmo. Nada sobra. Nada te detiene.</p>
+            <a href="#coleccion">Conoce los esenciales <span aria-hidden="true">→</span></a>
+          </div>
+          <div class="essentials-cards">
+            <article class="essential-card green">
+              <span class="essential-icon">◉</span><h3>Para cada cuerpo</h3><p>Cortes mujer, caballero y unisex para encontrar tu forma de trabajar.</p>
+            </article>
+            <article class="essential-card orange">
+              <span class="essential-icon">✧</span><h3>Para cada turno</h3><p>Telas que se sienten ligeras y detalles que hacen la diferencia.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="size-promo page-width" id="guia">
+        <div>
+          <p class="eyebrow"><span aria-hidden="true">⌁</span> La talla correcta cambia todo</p>
+          <h2>Encuentra tu ajuste<br>en menos de un minuto.</h2>
+          <p>Ten a la mano tu cinta métrica y elige la talla que te permita moverte con libertad. Te acompañamos si tienes dudas.</p>
+          <button class="button button-dark" type="button" data-action="open-guide">Abrir guía de tallas <span aria-hidden="true">→</span></button>
+        </div>
+        <div class="size-promo-mark" aria-hidden="true"><span>⌁</span></div>
+      </section>
+
+      <section class="faq-section" id="preguntas">
+        <div class="faq-inner page-width">
+          <div class="faq-intro">
+            <p class="section-kicker">Preguntas frecuentes</p>
+            <h2>Compra con<br>tranquilidad.</h2>
+            <p>Si aquí no encuentras lo que buscas, nuestro equipo te responde por WhatsApp.</p>
+            <a href="https://wa.me/525500000000?text=Hola%20MSA%20Scrubs%2C%20tengo%20una%20pregunta." target="_blank" rel="noreferrer">◉ Escribir al equipo</a>
+          </div>
+          <div class="faq-list">
+            <details><summary>¿Cómo elijo mi talla?<span>⌄</span></summary><p>Consulta la guía de tallas y mide sobre ropa ligera. Si estás entre dos tallas, elige la mayor.</p></details>
+            <details><summary>¿Hacen envíos a todo México?<span>⌄</span></summary><p>Sí. Enviamos a todo el país y confirmamos el costo y tiempo según tu ciudad al tomar el pedido.</p></details>
+            <details><summary>¿Puedo hacer un cambio?<span>⌄</span></summary><p>Sí, tienes 30 días para solicitarlo. La prenda debe estar sin uso y conservar sus etiquetas.</p></details>
+            <details><summary>¿Qué materiales utilizan?<span>⌄</span></summary><p>Nuestras telas son suaves, flexibles y de secado rápido, elegidas para acompañar turnos largos.</p></details>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-inner page-width">
+        <div class="footer-top">
+        <div><img src="./images/msa-scrubs-logo.png" alt="MSA Scrubs & Uniforms"><p>Uniformes que acompañan tu forma de cuidar.</p></div>
+          <nav aria-label="Navegación del pie de página">
+            <a href="#coleccion">Colección</a>
+            <button type="button" data-action="open-guide">Guía de tallas</button>
+            <a href="https://www.instagram.com/msa_scrubs/" target="_blank" rel="noreferrer">Instagram</a>
+            <a href="https://wa.me/525500000000" target="_blank" rel="noreferrer">WhatsApp</a>
+          </nav>
+        </div>
+        <div class="footer-bottom"><span>© 2024 MSA Scrubs · Hecho en México</span><span>WhatsApp provisional: 52 55 0000 0000</span></div>
+      </div>
+    </footer>
+
+    <div id="overlay-root"></div>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <button class="help-launcher" type="button" data-action="toggle-assistant"><span>?</span><b>¿Te ayudamos?</b></button>
+    <aside class="assistant-panel" id="assistant-panel" hidden aria-label="Asistente MSA"></aside>
+  </body>
+</html>
