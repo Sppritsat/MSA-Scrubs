@@ -1,5 +1,5 @@
 [build]
-  command = "npm install -g pnpm@10 && pnpm install --frozen-lockfile --filter @workspace/msa-scrubs... && pnpm --filter @workspace/msa-scrubs run build"
+  command = "pnpm install --frozen-lockfile --filter @workspace/msa-scrubs... && pnpm --filter @workspace/msa-scrubs run build"
   publish = "artifacts/msa-scrubs/dist/public"
 
 [build.environment]
