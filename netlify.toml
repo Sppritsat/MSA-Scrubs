@@ -1,0 +1,5 @@
+# El proyecto vive en la carpeta MSA-Scrubs.
+[build]
+  base = "MSA-Scrubs"
+  publish = "sitio"
+  command = ""
