@@ -1,0 +1,9 @@
+# Sitio estático: no necesita instalar nada ni compilar.
+[build]
+  publish = "sitio"
+  command = ""
+
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
