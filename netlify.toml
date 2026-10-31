@@ -1,0 +1,10 @@
+# Sitio estático: no necesita instalar nada ni compilar.
+# Netlify publica la carpeta "sitio" que está en la raíz del repositorio.
+[build]
+  publish = "sitio"
+  command = ""
+
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
